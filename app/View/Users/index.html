@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1> {{ user.email }} </h1>
+{{ user.created_at }}
+<br>
+
+<h1>Friends:</h1>
+{% for friend in friends %}
+<li>
+    <a href="/user/{{ friend.id }}">
+        {{ friend.email }} </a>
+</li>
+{% endfor %}
+
+{% if session.userid == user.id %}
+<h1>Invites:</h1>
+{% for invite in invites %}
+<li>
+    <a href="/user/{{ invite.id }}">
+        {{ invite.email}} </a>
+
+<div>
+    <form method="post" action="/user/{{ session.userid }}/invite/{{ invite.id }}/accept" style ='float: left; padding: 5px;'>
+        <button type="submit" >Accept</button>
+    </form>
+    <form method="post" action="/user/{{ session.userid }}/invite/{{ invite.id }}/decline" style ='float: left; padding: 5px;'>
+        <button type="submit" >Decline</button>
+    </form>
+</div>
+</li>
+
+{% endfor %}
+{% endif %}
+<br>
+<br>
+{% endblock %}

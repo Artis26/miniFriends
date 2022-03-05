@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="post" action="/user/login">
+    <div class="container">
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Username" name="email" id="email" required>
+
+        <label for="pwd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="pwd" id = "pwd"required>
+
+        <button type="submit">Login</button>
+        <button type="submit" onclick="location.href='/user/register'">Sign Up</button>
+    </div>
+</form>
+{% endblock %}
