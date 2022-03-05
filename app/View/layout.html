@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+{% block head %}
+<body style="background-color:powderblue;">
+<head>
+    <link rel="stylesheet" href="/app/View/style.css">
+    <div class="header">
+        <a href="#default" class="logo">{% if session.user != null %}
+            User: {{ session.user }}
+        {% else %}
+            User: Anonymous
+        {% endif %}</a>
+        <div class="header-right">
+            <a class="active" href="/">Home</a>
+            <a href="/user/myprofile">MyProfile</a>
+            <a href="#about">{% if session.user != null %}
+                <form method="post" action="/user/logout" style="text-align: right">
+                    <button type="submit">Logout</button>
+                </form>
+                {% endif %}
+                {% if session.user == null %}
+                <form method="get" action="/user/login" style="text-align: right">
+                    <button type="submit" >Login</button>
+                </form>
+                {% endif %}</a>
+        </div>
+    </div>
+
+    {% endblock %}
+</head>
+<body>
+<div id="content">{% block content %} {% endblock %}</div>
+<div id="footer">
+    {% block footer %}
+    &copy; Copyright 2011 by <a href="http://domain.invalid/">YOU</a>.
+    {% endblock %}
+</div>
+</body>
+</html>

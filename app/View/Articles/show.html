@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if session.user != null %}
+<button class="button" onclick="location.href='/articles/create'" type="button">
+    Create Article</button>
+{% endif %}
+
+{% if session.user == null %}
+<a href="/user/login">Create</a>
+{% endif %}
+
+<h1>All Articles: </h1>
+
+<ul>
+    {% for art in article %}
+    <li>
+        <form method="post" action="/articles/{{ art.id }}/delete">
+         <a href="/articles/{{ art.id }}">
+            <h2>{{ art. title }} </h2> </a>
+        {% if session.user == art.author %}
+            <button type="submit" class="smallButton" onclick="return confirm('Are you sure?');">X</button>
+        </form>
+        {% endif %}
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

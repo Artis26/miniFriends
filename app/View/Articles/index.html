@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    span {
+        background-color: coral;
+    }
+</style>
+<body>
+<h1> {{ article.title }} </h1>
+
+<div>
+    <span>
+        {{ article.description }}
+    </span>
+</div>
+<small>
+    {% if session.user == article.author %}
+    (<a href="/articles/{{ article.id }}/edit">Edit</a>)</small>
+<br>
+{% endif %}
+<br>
+{% if article. author == null %}
+author: Anonymus
+{% endif %}
+
+{% if article. author %}
+author: {{ article. author }}
+{% endif %}
+<br>
+<br>
+<form method="post" action="/articles/{{ article.id }}/like">
+    {% if session.userid not in likes %}
+    <button type="submit"> Like </button>
+    {% else %}
+    <button type="submit"> Unlike </button>
+    {% endif %}
+    <br>
+{{ likes|length }} people like this
+</form>
+<br>
+<br>
+<form method="post" action="/articles/{{ article.id }}/store">
+    <div>
+        <label for="comment">Comment: </label>
+        <br>
+        <textarea id="comment" name="comment"></textarea>
+    </div>
+
+    <button type="submit">Post Comment</button>
+</form>
+
+
+{% for comment in comments %}
+<li style="text-align: right">
+    {{ comment.text }} || Author:  {{ comment.author}} || Time: {{ comment.createdAt}}
+    {% if session.userid == comment.author_id %}
+    <form method="post" action="/articles/{{ article.id }}/comment/{{ comment.id }}/delete">
+        <button type="submit" onclick="return confirm('Are you sure?');">X</button>
+    </form>
+    {% endif %}
+</li>
+{% endfor %}
+</body>
+{% endblock %}
+
