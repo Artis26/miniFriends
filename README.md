@@ -1,1 +1,1 @@
-This is miniFriends project.
+This is miniFriends project. More. 
