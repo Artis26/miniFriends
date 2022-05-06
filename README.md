@@ -1,0 +1,1 @@
+This is miniFriends project.

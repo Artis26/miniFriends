@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 use App\Controllers\ArticleCommentsController;
 use App\Controllers\UsersController;
 use App\Redirect;
